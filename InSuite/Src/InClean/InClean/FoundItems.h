@@ -1,0 +1,64 @@
+// FoundItems.h
+
+#pragma once
+
+#ifndef FI_TYPE
+#define FI_TYPE
+#define FI_TEMP_FILE		0x0001
+#define FI_TEMP_FOLDER		0x0002
+#define FI_ASYNC_FILE		0x0003
+#define FI_ASYNC_FOLDER		0x0004
+#define FI_INTERNET_FILE	0x0005
+#define FI_INTERNET_FOLDER	0x0006
+#define FI_COOKIE_FILE		0x0007
+#define FI_COOKIE_FOLDER	0x0008
+#define FI_HISTORY_FILE		0x0009
+#define FI_HISTORY_FOLDER	0x000A
+#define FI_ERRREP_FILE		0x000B
+#define FI_ERRREP_FOLDER	0x000C
+#define FI_LOG_FILE			0x000D
+#define FI_ZEROSIZE_FILE	0x000E
+#define FI_INVALID_SHORTCUT	0x000F
+#define FI_THUMBS_DB		0x0010
+#define FI_NOTI_QUEUE		0x0011
+#define FI_NOTI_EVENT		0x0012
+#define FI_OBSOLETE_KEY		0x0101
+#define FI_MISSING_APPID	0x0102
+#define FI_MISSING_ICON		0x0103
+#define FI_MISSING_INPROC32	0x0104
+#define FI_MISSING_APPIDREF	0x0105
+#define FI_MISSING_PROGID	0x0106
+#define FI_MISSING_CLSID	0x0107
+#define FI_UNUSED_CLASS		0x0108
+#endif
+
+#ifndef FI_STRUCTURE
+#define FI_STRUCTURE
+typedef struct _tFoundItem
+{
+	int				nType;
+	HKEY			hKey;
+	TCHAR			szName[MAX_PATH + 1];
+	TCHAR			szValue[MAX_PATH + 1];
+	CEOID			oidRec;
+	ULARGE_INTEGER	uiSize;
+} FOUND_ITEM;
+#endif
+
+
+#ifndef NOTIFICATION_STRUCTURE
+#define NOTIFICATION_STRUCTURE
+#define NOTIFICATION_MAXBUFFER	512
+typedef struct _tNotification
+{
+	CEOID		oid;
+	FILETIME	ftTime;
+	DWORD		dwFlags1;
+	DWORD		dwFlags2;
+	BYTE		szBuffer[NOTIFICATION_MAXBUFFER];
+	TCHAR		szEvent[MAX_PATH + 1];
+	TCHAR		szType[MAX_PATH + 1];
+} NOTI_ITEM;
+#endif
+
+extern CArray<FOUND_ITEM, FOUND_ITEM>	g_arrFoundItems;
